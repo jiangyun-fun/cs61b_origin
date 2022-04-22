@@ -22,7 +22,7 @@ public class Planet {
 		mass = p.mass;
 		imgFileName = p.imgFileName;
 	}
-/*	
+
 	public  double calcDistance(Planet planet) {
 		double Distance = 0;
 		Distance = Math.sqrt(Math.pow(this.xxPos - planet.xxPos, 2)+Math.pow(this.yyPos - planet.yyPos, 2));
@@ -49,7 +49,7 @@ public class Planet {
 		double ForceExertedByY = ForceExertedBy*(planet.yyPos-yyPos)/Distance;
 		return ForceExertedByY;
 	}
-	
+
 	public double calcNetForceExertedByX(Planet[] allPlanets) {
 		double NetForceExertedByX = 0;
 		for(Planet planet : allPlanets) {
@@ -67,7 +67,7 @@ public class Planet {
 		}
 		return NetForceExertedByY;
 	}
-*/
+
 }
 
 
