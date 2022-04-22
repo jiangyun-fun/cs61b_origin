@@ -1,7 +1,3 @@
-package proj0;
-
-import java.util.Iterator;
-
 public class Planet {
 	public static double G = 6.67e-11;
 	
@@ -19,9 +15,14 @@ public class Planet {
 	}
 	
 	public Planet(Planet p) {
-
+		xxPos = p.xxPos;
+		yyPos = p.yyPos;
+		xxVel = p.xxVel;
+		yyVel = p.yyVel;
+		mass = p.mass;
+		imgFileName = p.imgFileName;
 	}
-	
+/*	
 	public  double calcDistance(Planet planet) {
 		double Distance = 0;
 		Distance = Math.sqrt(Math.pow(this.xxPos - planet.xxPos, 2)+Math.pow(this.yyPos - planet.yyPos, 2));
@@ -66,7 +67,7 @@ public class Planet {
 		}
 		return NetForceExertedByY;
 	}
-
+*/
 }
 
 
