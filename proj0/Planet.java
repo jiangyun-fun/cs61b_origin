@@ -14,15 +14,15 @@ public class Planet {
 		imgFileName = img;
 	}
 	
-	public Planet(Planet p) {
-		xxPos = p.xxPos;
-		yyPos = p.yyPos;
-		xxVel = p.xxVel;
-		yyVel = p.yyVel;
-		mass = p.mass;
-		imgFileName = p.imgFileName;
-	}
-
+    public Planet(Planet p) {
+        xxPos = p.xxPos;
+        yyPos = p.yyPos;
+        xxVel = p.xxVel;
+        yyVel = p.yyVel;
+        mass = p.mass;
+        imgFileName = p.imgFileName;
+    }
+	
 	public  double calcDistance(Planet planet) {
 		double Distance = 0;
 		Distance = Math.sqrt(Math.pow(this.xxPos - planet.xxPos, 2)+Math.pow(this.yyPos - planet.yyPos, 2));
@@ -49,7 +49,7 @@ public class Planet {
 		double ForceExertedByY = ForceExertedBy*(planet.yyPos-yyPos)/Distance;
 		return ForceExertedByY;
 	}
-
+	
 	public double calcNetForceExertedByX(Planet[] allPlanets) {
 		double NetForceExertedByX = 0;
 		for(Planet planet : allPlanets) {
@@ -68,6 +68,17 @@ public class Planet {
 		return NetForceExertedByY;
 	}
 
+	public void update(double dt,double fX,double fY) {
+		double aX = fX/mass;
+		double aY = fY/mass;
+		
+		xxVel = xxVel + aX*dt;
+		yyVel = yyVel + aY*dt;
+		
+		xxPos = xxPos + xxVel*dt;
+		yyPos = yyPos + yyVel*dt;
+		
+	}
 }
 
 
