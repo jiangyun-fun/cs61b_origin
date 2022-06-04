@@ -1,7 +1,7 @@
 import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
 
-public class LinkedListDeque<T> {
+public class LinkedListDeque<T> implements Deque<T> {
 
     private  class IntNode {
         public IntNode prev;
@@ -43,6 +43,7 @@ public class LinkedListDeque<T> {
         size = 1;
     }
 */
+    @Override
     public void addFirst(T item){
         sentinel.next = new IntNode(sentinel,item,sentinel.next);
         //sentinel.prev = sentinel.prev.next;
@@ -51,6 +52,7 @@ public class LinkedListDeque<T> {
         size++;
     }
 
+    @Override
     public void addLast(T item){
         sentinel.prev = new IntNode(sentinel.prev,item,sentinel);
         sentinel.prev.prev.next = sentinel.prev;
@@ -58,6 +60,7 @@ public class LinkedListDeque<T> {
         size++;
     }
 
+    @Override
     public boolean isEmpty(){
         if(size == 0){
             //System.out.println("LFASE");
@@ -67,10 +70,12 @@ public class LinkedListDeque<T> {
         return FALSE;
     }
 
+    @Override
     public int size(){
         return size;
     }
 
+    @Override
     public void printDeque(){
         IntNode ptr = sentinel.next;
         T i = (T) "63";
@@ -83,6 +88,7 @@ public class LinkedListDeque<T> {
         System.out.println();
     }
 
+    @Override
     public T removeFirst(){
         T r = sentinel.next.item;
 
@@ -94,6 +100,7 @@ public class LinkedListDeque<T> {
         return r;
     }
 
+    @Override
     public T removeLast(){
         T r = sentinel.prev.item;
 
@@ -104,6 +111,7 @@ public class LinkedListDeque<T> {
         return r;
     }
 
+    @Override
     public T get(int index){
         IntNode ptr = sentinel.next;
         while (index != 0){
