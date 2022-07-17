@@ -30,6 +30,7 @@ public class HexWorld {
     }
 
 
+    /*
     public static char[][] addHexagon(int size, int xStart, int yStart) {
         char[][] hexagonWorld = new char[20][20];
 
@@ -63,6 +64,23 @@ public class HexWorld {
                 System.out.print(demoHexagon[i][j]);
             }
             System.out.println();
+        }
+    }
+    */
+    public static void addHexagon(int size, int xStart, int yStart, TETile[][] world) {
+        Random r = new Random(1000);
+
+        for (int ithRow = 1; ithRow <= size; ithRow++) {
+            int xx = initialDownXCoordinate(xStart, ithRow);
+            int downY = initialDownYCoordinate(yStart, ithRow);
+            int upY = initialUpYCoordinate(yStart, ithRow);
+            int width = hexRowWidth(size, ithRow);
+
+            for (int ithCol = 1; ithCol <= width; ithCol++) {
+                world[xx][downY] = TETile.colorVariant(Tileset.TREE, 100, 100, 100, r);
+                world[xx][upY] = TETile.colorVariant(Tileset.TREE, 100, 100, 100, r);;
+                xx += 1;
+            }
         }
     }
 }

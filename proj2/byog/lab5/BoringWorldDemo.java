@@ -28,12 +28,15 @@ public class BoringWorldDemo {
         }
 
         Random r = new Random(1000);
+        /*
         // fills in a block 14 tiles wide by 4 tiles tall
         for (int x = 20; x < 35; x += 1) {
             for (int y = 5; y < 10; y += 1) {
                 world[x][y] = TETile.colorVariant(Tileset.FLOWER, 300, 300, 300, r);
             }
         }
+        */
+        HexWorld.addHexagon(5, 10, 10, world);
 
         // draws the world to the screen
         ter.renderFrame(world);
