@@ -54,7 +54,7 @@ public class GuitarString {
                 }
             }
 
-            if (i >= capacity -1) {
+            if (i >= capacity - 1) {
                 items[lastElementPosition] = r;
                 buffer.enqueue(r);
                 lastElementPosition++;
