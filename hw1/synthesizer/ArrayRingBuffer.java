@@ -69,22 +69,15 @@ public class ArrayRingBuffer<T> extends AbstractBoundedQueue<T> {
         return deElement;
     }
 
-    @Override
-    public int capacity() {
-        return capacity;
-    }
-
-    @Override
-    public int fillCount() {
-        return fillCount;
-    }
-
 
 
     /**
      * Return oldest item, but don't remove it.
      */
     public T peek() {
+        if (isEmpty()) {
+            throw new RuntimeException("Ring Buffer Empty");
+        }
         return rb[first];
     }
 
