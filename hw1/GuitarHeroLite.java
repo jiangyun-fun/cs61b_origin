@@ -1,3 +1,5 @@
+import synthesizer.GuitarString;
+
 /** A client that uses the synthesizer package to replicate a plucked guitar string sound */
 public class GuitarHeroLite {
     private static final double CONCERT_A = 440.0;
@@ -5,8 +7,8 @@ public class GuitarHeroLite {
 
     public static void main(String[] args) {
         /* create two guitar strings, for concert A and C */
-        synthesizer.GuitarString stringA = new synthesizer.GuitarString(CONCERT_A);
-        synthesizer.GuitarString stringC = new synthesizer.GuitarString(CONCERT_C);
+        GuitarString stringA = new GuitarString(CONCERT_A);
+        GuitarString stringC = new GuitarString(CONCERT_C);
 
         while (true) {
 
