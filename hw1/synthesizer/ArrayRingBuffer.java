@@ -22,7 +22,7 @@ public class ArrayRingBuffer<T> extends AbstractBoundedQueue<T> {
         rb = (T []) new Object[capacity];
     }
 
-    public void lastPlusOne() {
+    private void lastPlusOne() {
         if (last == capacity - 1) {
             last = 0;
         } else {
@@ -30,7 +30,7 @@ public class ArrayRingBuffer<T> extends AbstractBoundedQueue<T> {
         }
     }
 
-    public void firstPlusOne() {
+    private void firstPlusOne() {
         if (first == capacity - 1) {
             first = 0;
         } else {
@@ -104,7 +104,7 @@ public class ArrayRingBuffer<T> extends AbstractBoundedQueue<T> {
             return returnItem;
         }
 
-        public int nextWizPos(int wizPos) {
+        private int nextWizPos(int wizPos) {
             if (wizPos == capacity - 1) {
                 wizPos = 0;
             } else {
