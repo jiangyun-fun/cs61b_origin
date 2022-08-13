@@ -6,6 +6,7 @@ import java.util.Arrays;
 
 public class Percolation {
     private WeightedQuickUnionUF gridsUnion;
+    private WeightedQuickUnionUF fullUnion;
     private int gridLen;
     private int gridNum;
     private int numberOfOpenSites;
@@ -18,7 +19,7 @@ public class Percolation {
         gridNum = N * N + 2;
         gridLen = N;
         gridsOpen = new int[N][N];
-
+        fullUnion = new WeightedQuickUnionUF(gridNum);
         gridsUnion = new WeightedQuickUnionUF(gridNum);
     }
 
@@ -31,42 +32,56 @@ public class Percolation {
         if (row >= gridLen || col >= gridLen) {
             throw new IndexOutOfBoundsException("both row and col should less than or equal to N~~");
         }
+        if (gridLen == 1) {
+            gridsOpen[0][0] = 1;
+            numberOfOpenSites++;
+            return;
+        }
         if (gridsOpen[row][col] != 1) {
             gridsOpen[row][col] = 1;
             numberOfOpenSites++;
         }
         if (row == 0) {
             gridsUnion.union(0, position);
+            fullUnion.union(0, position);
             if (gridsOpen[row + 1][col] == 1) {
                 gridsUnion.union(position, position + gridLen);
+                fullUnion.union(position, position + gridLen);
             }
         } else if (row == gridLen - 1) {
             gridsUnion.union(position, gridNum - 1);
             if (gridsOpen[row - 1][col] == 1) {
                 gridsUnion.union(position, position - gridLen);
+                fullUnion.union(position, position - gridLen);
             }
         } else {
             if (gridsOpen[row + 1][col] == 1) {
                 gridsUnion.union(position, position + gridLen);
+                fullUnion.union(position, position + gridLen);
             }
             if (gridsOpen[row - 1][col] == 1) {
                 gridsUnion.union(position, position - gridLen);
+                fullUnion.union(position, position - gridLen);
             }
         }
         if (col == 0) {
             if (gridsOpen[row][col + 1] == 1) {
                 gridsUnion.union(position, position + 1);
+                fullUnion.union(position, position + 1);
             }
         } else if (col == gridLen - 1) {
             if (gridsOpen[row][col - 1] == 1) {
                 gridsUnion.union(position, position - 1);
+                fullUnion.union(position, position - 1);
             }
         } else {
             if (gridsOpen[row][col + 1] == 1) {
                 gridsUnion.union(position, position + 1);
+                fullUnion.union(position, position + 1);
             }
             if (gridsOpen[row][col - 1] == 1) {
                 gridsUnion.union(position, position - 1);
+                fullUnion.union(position, position - 1);
             }
         }
     }
@@ -83,7 +98,8 @@ public class Percolation {
             throw new IndexOutOfBoundsException("both row and col should less than or equal to N~~");
         }
         int position = xyTo1d(row, col);
-        return gridsUnion.connected(0, position);
+
+        return fullUnion.connected(0, position);
     }
     public int numberOfOpenSites() {
         return numberOfOpenSites;
@@ -92,8 +108,10 @@ public class Percolation {
     public boolean percolates() {
         return gridsUnion.connected(0, gridNum - 1);
     }
+
+
     public static void main(String[] args) {
-        Percolation pl = new Percolation(3);
+        Percolation pl = new Percolation(4);
         pl.open(0, 0);
         if (pl.isOpen(0, 0)) {
             System.out.println(pl.numberOfOpenSites + "isOpen~~~");
@@ -107,8 +125,13 @@ public class Percolation {
             System.out.println(pl.numberOfOpenSites + "not percolates~~~");
         }
         pl.open(2, 1);
+        pl.open(3, 1);
         if (pl.percolates()) {
             System.out.println(pl.numberOfOpenSites + "percolates~~~");
+        }
+        pl.open(3, 3);
+        if (!pl.isFull(3, 3)) {
+            System.out.println("notFull");
         }
 
         PercolationStats ps = new PercolationStats(200, 200, new PercolationFactory());
