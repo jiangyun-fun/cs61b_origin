@@ -26,7 +26,12 @@ public class MyHashMap<K, V> implements Map61B<K, V> {
         this.clear();
     }
 
-    /* Removes all of the mappings from this map. */
+    public MyHashMap(int chains) {
+        buckets = new ArrayMap[chains];
+        this.clear();
+    }
+
+    /** Removes all of the mappings from this map. */
     @Override
     public void clear() {
         this.size = 0;
@@ -48,24 +53,58 @@ public class MyHashMap<K, V> implements Map61B<K, V> {
         return Math.floorMod(key.hashCode(), numBuckets);
     }
 
-    /* Returns the value to which the specified key is mapped, or null if this
+    /** Returns the value to which the specified key is mapped, or null if this
      * map contains no mapping for the key.
      */
     @Override
     public V get(K key) {
-        throw new UnsupportedOperationException();
-    }
+        if (key == null) {
+            throw new IllegalArgumentException("argument to get() is null");
+        }
+        int i = hash(key);
+        return buckets[i].get(key);    }
 
-    /* Associates the specified value with the specified key in this map. */
+    /** Associates the specified value with the specified key in this map. */
     @Override
     public void put(K key, V value) {
-        throw new UnsupportedOperationException();
+        if (key == null) {
+            throw new IllegalArgumentException("first argument to put() is null");
+        }
+        if (value == null) {
+            remove(key);
+            size--;
+            return;
+        }
+
+        // double table size if average length of list >= 10
+        if (loadFactor() >= MAX_LF) {
+            resize(2 * size);
+        }
+
+        int i = hash(key);
+        if (!buckets[i].containsKey(key)) {
+            size++;
+        }
+        buckets[i].put(key, value);
     }
 
-    /* Returns the number of key-value mappings in this map. */
+    private void resize(int chains) {
+        MyHashMap<K, V> temp = new MyHashMap<>(chains);
+        for (int i = 0; i < buckets.length; i++) {
+            for (K key : buckets[i].keySet()) {
+                temp.put(key, buckets[i].get(key));
+            }
+        }
+        //this.m  = temp.m;
+        this.size  = temp.size;
+        this.buckets = temp.buckets;
+    }
+
+    /** Returns the number of key-value mappings in this map. */
     @Override
     public int size() {
-        throw new UnsupportedOperationException();
+        return size;
+
     }
 
     //////////////// EVERYTHING BELOW THIS LINE IS OPTIONAL ////////////////
