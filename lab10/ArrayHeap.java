@@ -103,20 +103,24 @@ public class ArrayHeap<T> implements ExtrinsicPQ<T> {
     /**
      * Bubbles up the node currently at the given index.
      */
-    /*
+
     private void swim(int index) {
         // Throws an exception if index is invalid. DON'T CHANGE THIS LINE.
         validateSinkSwimArg(index);
 
-        while ( index > 1 && getNode(index).priority() < getNode(parentIndex(index)).priority()) {
+        Node curr = getNode(index);
+        Node parent = getNode(parentIndex(index));
+        while ( index > 1 && curr.priority() < parent.priority()) {
             swap(index, parentIndex(index));
             index = parentIndex(index);
+             curr = getNode(index);
+             parent = getNode(parentIndex(index));
         }
         return;
     }
-    */
 
-    private void swim(int index) {
+
+    /*private void swim(int index) {
         // Throws an exception if index is invalid. DON'T CHANGE THIS LINE.
         validateSinkSwimArg(index);
         Node curr = getNode(index);
@@ -128,7 +132,7 @@ public class ArrayHeap<T> implements ExtrinsicPQ<T> {
             swap(index, parentIndex(index));
             swim(parentIndex(index));
         }
-    }
+    }*/
 
 
     /**
