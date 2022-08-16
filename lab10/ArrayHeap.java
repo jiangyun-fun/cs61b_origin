@@ -138,7 +138,7 @@ public class ArrayHeap<T> implements ExtrinsicPQ<T> {
     /**
      * Bubbles down the node currently at the given index.
      */
-    /*private void sink(int index) {
+    private void sink(int index) {
         // Throws an exception if index is invalid. DON'T CHANGE THIS LINE.
         validateSinkSwimArg(index);
 
@@ -152,9 +152,9 @@ public class ArrayHeap<T> implements ExtrinsicPQ<T> {
             minIndexNode = getNode(minIndex);
         }
         return;
-    }*/
+    }
 
-    private void sink(int index) {
+    /*private void sink(int index) {
         // Throws an exception if index is invalid. DON'T CHANGE THIS LINE.
         validateSinkSwimArg(index);
         Node curr = getNode(index);
@@ -167,7 +167,7 @@ public class ArrayHeap<T> implements ExtrinsicPQ<T> {
             swap(index, childIndex);
             sink(childIndex);
         }
-    }
+    }*/
 
     /**
      * Inserts an item with the given priority value. This is enqueue, or offer.
